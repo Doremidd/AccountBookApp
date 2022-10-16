@@ -1,10 +1,11 @@
 # *I'm on budget!*
 
-### ***Help managing your consumption and savings***
+### ***An app help managing your consumptions***
 
 **User Story:**
-- *As a user,I want to be able to add the money I spent in different types of usage*
-- *As a user,I want to be able to record my income*
-- *As a user,I want be able to make monthly budget in different types of usage*
-- *As a user,I want to able to see my savings*
-- *As a user,I want to able view the changes of my total consumption during a period in graphs*
+- *As a user,I want to be able to add my cost in different types of usage to the accountbook list*
+- *As a user,I want to be able to see the list of my costs*
+- *As a user,I want be able to get my cost at a specific date*
+- *As a user,I want to able to clear all costs before a specific date*
+
+
