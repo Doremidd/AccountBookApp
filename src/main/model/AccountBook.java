@@ -38,21 +38,22 @@ public class AccountBook {
     }
 
     //EFFECTS: For a given date, all the costs before that day(itself not included) will be deleted
-    public ArrayList<Cost> clearCost(String givendate) {
+    public boolean clearCost(String givendate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        ArrayList<Cost> toRemove= new ArrayList<>();
         try {
             Date newgivendate = sdf.parse(givendate);
             for (Cost c : accountbook) {
                 String date = c.getdate();
                 Date newdate = sdf.parse(date);
                 if (newdate.before(newgivendate)) {
-                    accountbook.remove(c);
+                    toRemove.add(c);
                 }
             }
         } catch (ParseException e) {
             System.out.println("Wrong date format");
         }
-        return accountbook;
+        return accountbook.removeAll(toRemove);
     }
 
     public int size() {
