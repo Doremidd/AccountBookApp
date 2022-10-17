@@ -18,9 +18,9 @@ public class AccountBook {
         accountbook.add(c);
     }
 
-    //EFFECTS: get the total amount of cost up till now
-    public int getCost() {
-        int totalamount = 0;
+    //EFFECTS: get the total amount of cost up till now to 2 decimal places
+    public double getCost() {
+        double totalamount = 0.00;
         for (Cost c : accountbook) {
             totalamount = totalamount + c.getamount();
         }
@@ -40,7 +40,7 @@ public class AccountBook {
     //EFFECTS: For a given date, all the costs before that day(itself not included) will be deleted
     public boolean clearCost(String givendate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        ArrayList<Cost> toRemove= new ArrayList<>();
+        ArrayList<Cost> toRemove = new ArrayList<>();
         try {
             Date newgivendate = sdf.parse(givendate);
             for (Cost c : accountbook) {

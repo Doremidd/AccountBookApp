@@ -6,19 +6,21 @@ import java.util.Date;
 //Represent a cost with its date,amount(in dollars) and usage
 public class Cost {
     private String date;    //the date when the cost happened
-    private int amount;   //the amount of the cost
+    private double amount;   //the amount of the cost
     private String usage; //the usage for the consumption
 
     //REQUIRES: amount>=0
     //EFFECTS: construct a cost with given date,amount and usage
-    public Cost(String date, int amount, String usage) {
+    public Cost(String date, double amount, String usage) {
         this.date = date;
         this.amount = amount;
         this.usage = usage;
     }
 
-    public int getamount() {
-        return amount;
+    public double getamount() {
+        String string = String.format("%.2f",amount);
+        double newamount = Double.parseDouble(string);
+        return newamount;
     }
 
     public String getdate() {
@@ -31,8 +33,9 @@ public class Cost {
 
 
     public String toString() {
-        return "[ date:" + date + "," + "amount: " + amount + ", "
-                + "usage:" + usage + "]";
+        String amountStr = String.format("%.2f", amount);  // get amount to 2 decimal places as a string
+        return "date:" + date + "," + "amount: " + amountStr + ", "
+                + "usage:" + usage;
     }
 
 }
