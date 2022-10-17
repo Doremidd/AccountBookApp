@@ -9,10 +9,12 @@ import java.util.Date;
 public class AccountBook {
     private ArrayList<Cost> accountbook;
 
+    //EFFECTS:construct a new AccountBook consists of list of costs
     public AccountBook() {
         accountbook = new ArrayList<>();
     }
 
+    //MODIFIES:this
     //EFFECTS:add a cost to the accountbook list
     public void addcost(Cost c) {
         accountbook.add(c);

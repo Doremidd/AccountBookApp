@@ -17,6 +17,8 @@ public class Cost {
         this.usage = usage;
     }
 
+
+    //EFFECTS:get the amount of a cost to 2 decimal places
     public double getamount() {
         String string = String.format("%.2f",amount);
         double newamount = Double.parseDouble(string);
@@ -31,7 +33,9 @@ public class Cost {
         return usage;
     }
 
-
+    //MODIFIES: return a String representation of the cost
+    //Source: https://github.students.cs.ubc.ca/CPSC210/TellerApp
+    //Learn from the toString method in tellApp to show the string format of an object
     public String toString() {
         String amountStr = String.format("%.2f", amount);  // get amount to 2 decimal places as a string
         return "date:" + date + "," + "amount: " + amountStr + ", "
