@@ -63,13 +63,18 @@ public class AccountBookApp {
     public void addcost() {
         System.out.println("Please enter cost date:");
         System.out.println("Date format should be yyyy-MM-dd, e.g. '2022-10-15.'");
+        scanner.nextLine();
         String date = scanner.nextLine();
-        System.out.println("Please enter cost usage:");
-        String usage = scanner.nextLine();
-        System.out.println("Please enter cost amount:");
-        double amount = scanner.nextDouble();
-        Cost cost = new Cost(date,amount,usage);
-        accountbook.addcost(cost);
+        if (validdateformat(date)) {
+            System.out.println("Please enter cost usage:");
+            String usage = scanner.nextLine();
+            System.out.println("Please enter cost amount:");
+            double amount = scanner.nextDouble();
+            Cost cost = new Cost(date,amount,usage);
+            accountbook.addcost(cost);
+        } else {
+            System.out.println("Please follow the required date format");
+        }
     }
 
 
@@ -89,6 +94,16 @@ public class AccountBookApp {
         String givendate = scanner.next();
         accountbook.clearCost(givendate);
         System.out.println(accountbook.showCost());
+    }
+
+    public boolean validdateformat(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            sdf.parse(date);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }
