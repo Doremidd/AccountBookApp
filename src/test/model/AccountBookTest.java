@@ -90,11 +90,9 @@ public void testmultipleshowCost(){
 
 
     @Test
-    public void testclearinvalid(){
+    public void testclearcostinvalid(){
         testab.addcost(Cost1);
-        testab.addcost(Cost2);
-        testab.addcost(Cost3);
-        assertFalse(testab.clearCost("01-02-2022"));
+        assertFalse(testab.clearCost("20220101"));
     }
 
 @Test
