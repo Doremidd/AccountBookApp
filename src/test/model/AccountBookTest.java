@@ -94,11 +94,7 @@ public void testmultipleshowCost(){
         testab.addcost(Cost1);
         testab.addcost(Cost2);
         testab.addcost(Cost3);
-        testab.clearCost("01-02-2022");
-        assertEquals(testab.size(),3);
-        assertTrue(testab.contains(Cost1));
-        assertTrue(testab.contains(Cost2));
-        assertTrue(testab.contains(Cost3));
+        assertFalse(testab.clearCost("01-02-2022"));
     }
 
 @Test

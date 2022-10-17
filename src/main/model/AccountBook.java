@@ -53,7 +53,7 @@ public class AccountBook {
                 }
             }
         } catch (ParseException e) {
-            System.out.println("Wrong date format");
+            return false;
         }
         return accountbook.removeAll(toRemove);
     }
