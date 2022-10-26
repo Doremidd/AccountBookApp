@@ -2,7 +2,11 @@ package ui;
 
 import model.AccountBook;
 import model.Cost;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,16 +14,21 @@ import java.util.Scanner;
 
 //The AccountBook application
 public class AccountBookApp {
+    private static final String JSON_STORE = "./data/acountbook.json";
     private AccountBook accountbook;
     private Scanner scanner;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
 
     //initialize accountbook and run the application
     //Source:https://github.students.cs.ubc.ca/CPSC210/TellerApp
     //Learn how to launch the app
     public AccountBookApp() {
-        accountbook = new AccountBook();
+        accountbook = new AccountBook("Selina's AccountBook");
         scanner = new Scanner(System.in);
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
         runAccountBook();
     }
 
@@ -34,6 +43,7 @@ public class AccountBookApp {
             displayMenu();
             command = scanner.next();
             if (command.equals("[5]")) {
+                saveaccountbook();
                 keepgoing = false;
             } else {
                 processcommand(command);
@@ -51,6 +61,8 @@ public class AccountBookApp {
         System.out.println("\t [3]:View list of costs");
         System.out.println("\t [4]:Clear costs");
         System.out.println("\t [5]:Save and Quit");
+        System.out.println("\t [6]:Load AccountBook from file");
+
     }
 
 
@@ -65,6 +77,8 @@ public class AccountBookApp {
             viewcost();
         } else if (command.equals("[4]")) {
             clearcost();
+        } else if (command.equals("[6]")) {
+            loadaccountbook();
         } else {
             System.out.println("Selection not valid");
         }
@@ -122,6 +136,30 @@ public class AccountBookApp {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads AccountBook from file
+    private void  loadaccountbook() {
+        try {
+            accountbook = jsonReader.read();
+            System.out.println("Loaded " + accountbook.getname() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    //MODIFIES:this
+    //EFFECTS: save AccountBook to file
+    public void saveaccountbook() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(accountbook);
+            jsonWriter.close();
+            System.out.println("Saved " + accountbook.getname() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 

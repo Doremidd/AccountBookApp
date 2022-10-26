@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //Represent a cost with its date,amount(in dollars) and usage
-public class Cost {
+public class Cost implements Writable {
     private String date;    //the date when the cost happened
     private double amount;   //the amount of the cost
     private String usage; //the usage for the consumption
@@ -40,6 +43,15 @@ public class Cost {
         String amountStr = String.format("%.2f", amount);  // get amount to 2 decimal places as a string
         return "date:" + date + "," + "amount: " + amountStr + ", "
                 + "usage:" + usage;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("date",date);
+        jsonObject.put("amount",amount);
+        jsonObject.put("usage",usage);
+        return jsonObject;
     }
 
 }

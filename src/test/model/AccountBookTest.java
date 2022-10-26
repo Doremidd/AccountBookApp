@@ -2,13 +2,15 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persistence.JsonTest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 //Testclass for AccountBook Class
-public class AccountBookTest {
+public class AccountBookTest extends JsonTest {
 private AccountBook testab;
 private  Cost Cost1 = new Cost("2022-10-01",200.00,"buy clothes");
 private  Cost Cost2 = new Cost("2022-01-01",100.00,"go to restaurants");
@@ -16,7 +18,7 @@ private  Cost Cost3 = new Cost("2022-09-15",500.50,"go for a trip");
 
 @BeforeEach
     public void setup(){
-    testab = new AccountBook();
+    testab = new AccountBook("Selina's AccountBook");
 }
 
 @Test
@@ -141,6 +143,13 @@ public void testclearcostjustthatday(){
         assertEquals(testab.size(),0);
     }
 
+    @Test
+    public void testgetcosts(){
+        testab.addcost(Cost1);
+        List<Cost> costs = testab.getcosts();
+        assertEquals(1,costs.size());
+        checkCost("2022-10-01",200.00,"buy clothes",Cost1);
+    }
 
 
 
