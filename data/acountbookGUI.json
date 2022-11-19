@@ -1,0 +1,15 @@
+{
+    "costs": [
+        {
+            "date": "2022-09-21",
+            "amount": 10,
+            "usage": "eat"
+        },
+        {
+            "date": "2022-09-22",
+            "amount": 20,
+            "usage": "eat"
+        }
+    ],
+    "name": "Selina's AccountBook"
+}

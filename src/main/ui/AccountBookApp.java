@@ -32,6 +32,7 @@ public class AccountBookApp {
         runAccountBook();
     }
 
+
     //MODIFIES:this
     //EFFECTS:deal with user input
     //Source:https://github.students.cs.ubc.ca/CPSC210/TellerApp
@@ -139,6 +140,10 @@ public class AccountBookApp {
         }
     }
 
+    public AccountBook getaccountbook() {
+        return accountbook;
+    }
+
     // MODIFIES: this
     // EFFECTS: loads AccountBook from file
     private void  loadaccountbook() {
@@ -162,6 +167,8 @@ public class AccountBookApp {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
+
+
 
 }
 

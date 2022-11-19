@@ -1,15 +1,8 @@
 {
-    "costs": [
-        {
-            "date": "2022-09-15",
-            "amount": 100,
-            "usage": "hhh"
-        },
-        {
-            "date": "2020-08-08",
-            "amount": 50,
-            "usage": "lalala"
-        }
-    ],
+    "costs": [{
+        "date": "2022-10-15",
+        "amount": 100,
+        "usage": "go for fun"
+    }],
     "name": "Selina's AccountBook"
 }

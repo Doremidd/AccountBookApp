@@ -42,7 +42,7 @@ public class AccountBook implements Writable {
         ArrayList<String> costlist = new ArrayList<>();
         for (Cost c : costs) {
             String coststr = c.toString();
-            costlist.add(coststr);
+            costlist.add(coststr + "\n");
         }
         return costlist;
     }
