@@ -18,3 +18,16 @@
 - You can locate my visual component by looking at the image added to the Jlabel. 
 - You can save the state of my application by clicking the "Save" button.
 - You can reload the state of my application by clicking the "Load" button.
+
+**Phase 4: Task 2:**
+- *Thu Dec 01 19:01:38 PST 2022  100.0 is added to Selina's AccountBook*
+- *Thu Dec 01 19:02:05 PST 2022  30.0 is added to Selina's AccountBook*
+- *Thu Dec 01 19:02:17 PST 2022  Costs before 2022-11-18 are cleared*
+
+**Phase 4: Task 3:**
+- *In the AccountBookGUI class,there are many duplicate codes in those loading picture methods,it's necessary to 
+  extract the duplicated parts into a different method, and call it each time loading a new picture*
+- *AccountBookGUI class and AccountBookApp class both use load and save methods and contain fields of JsonReader and 
+  JsonWriter. Therefore, it's necessary to build a new abstract class with the load and save methods, then 
+  AccountBookGUI and AccountBookApp can just extends the abstract class to use these methods.*
+

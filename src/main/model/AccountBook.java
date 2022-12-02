@@ -26,6 +26,7 @@ public class AccountBook implements Writable {
     //EFFECTS:add a cost to the accountbook list
     public void addcost(Cost c) {
         costs.add(c);
+        EventLog.getInstance().logEvent(new Event(c.getamount() + " is added to Selina's AccountBook"));
     }
 
     //EFFECTS: get the total amount of cost up till now to 2 decimal places
@@ -63,6 +64,7 @@ public class AccountBook implements Writable {
         } catch (ParseException e) {
             return false;
         }
+        EventLog.getInstance().logEvent(new Event("Costs before " + givendate + " are cleared"));
         return costs.removeAll(toRemove);
     }
 

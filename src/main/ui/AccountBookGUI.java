@@ -2,6 +2,8 @@ package ui;
 
 import model.AccountBook;
 import model.Cost;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -9,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,13 +29,13 @@ public class AccountBookGUI extends JFrame implements ActionListener {
     private JButton button2;
     private JButton saveButton;
     private JButton loadButton;
-    private AccountBook accountBook;
+    private AccountBook accountBook = new AccountBook("Selina's AccountBook");
     private JTextArea textArea;
     private JTextField datetext;
     private JTextField amounttext;
     private JTextField usagetext;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    private JsonReader jsonReader = new JsonReader(JSON_STORE);
     private JPanel buttonPane;
     private JPanel labelPane;
     private JPanel textPane;
@@ -45,8 +49,18 @@ public class AccountBookGUI extends JFrame implements ActionListener {
     //EFFECTS: build the constructor for GUI and set up all labels,buttons and text
     public  AccountBookGUI() {
         super("AccountBook");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setPreferredSize(new Dimension(450, 550));
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                EventLog el = EventLog.getInstance();
+                for (Event next:el) {
+                    System.out.println(next.toString());
+                }
+                System.exit(0);
+            }
+        });
         this.setuplabelsandText();
         this.setupbuttons();
         Container contentPane = getContentPane();
@@ -55,10 +69,6 @@ public class AccountBookGUI extends JFrame implements ActionListener {
         contentPane.add(buttonPane, BorderLayout.SOUTH);
         pack();
         setVisible(true);
-        accountBook = new AccountBook("Selina's AccountBook");
-        jsonWriter = new JsonWriter(JSON_STORE);
-        jsonReader = new JsonReader(JSON_STORE);
-
 
     }
 
@@ -137,7 +147,7 @@ public class AccountBookGUI extends JFrame implements ActionListener {
             load();
         }
         ArrayList<String>  costlist = accountBook.showCost();
-        textArea.setText(String.valueOf(costlist));
+        textArea.setText(String.join("",costlist));
     }
 
 

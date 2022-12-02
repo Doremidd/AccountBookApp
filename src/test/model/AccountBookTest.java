@@ -5,13 +5,15 @@ import org.junit.jupiter.api.Test;
 import persistence.JsonTest;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 //Testclass for AccountBook Class
-public class AccountBookTest extends JsonTest {
+public class AccountBookTest extends JsonTest{
 private AccountBook testab;
+private EventLog el;
 private  Cost Cost1 = new Cost("2022-10-01",200.00,"buy clothes");
 private  Cost Cost2 = new Cost("2022-01-01",100.00,"go to restaurants");
 private  Cost Cost3 = new Cost("2022-09-15",500.50,"go for a trip");
@@ -19,6 +21,8 @@ private  Cost Cost3 = new Cost("2022-09-15",500.50,"go for a trip");
 @BeforeEach
     public void setup(){
     testab = new AccountBook("Selina's AccountBook");
+    el = EventLog.getInstance();
+    el.clear();
 }
 
 @Test
@@ -37,6 +41,17 @@ public void testaddmultiplecost(){
     assertTrue(testab.contains(Cost1));
     assertTrue(testab.contains(Cost2));
     assertFalse(testab.contains(Cost3));
+}
+
+@Test
+public void testaddcostlogEvent(){
+    testab.addcost(Cost1);
+    ArrayList<Event> events = new ArrayList<>();
+    for(Event e:el) {
+        events.add(e);
+    }
+    assertEquals(events.size(),2);
+    assertEquals(events.get(1).getDescription(),200.00 + " is added to Selina's AccountBook");
 }
 
 
@@ -62,9 +77,8 @@ public void testaddmultiplecost(){
     public void testshowCostonlyone(){
     testab.addcost(Cost1);
     ArrayList<String> costlist = testab.showCost();
-    ArrayList<String> expected = new ArrayList<>();
     assertEquals(1,costlist.size());
-    assertEquals(costlist.get(0),"date:2022-10-01,amount: 200.00, usage:buy clothes");
+    assertEquals(costlist.get(0),"date:2022-10-01,amount: 200.00, usage:buy clothes\n");
 }
 
 
@@ -74,8 +88,8 @@ public void testmultipleshowCost(){
     testab.addcost(Cost2);
     ArrayList<String> costlist =  testab.showCost();
     assertEquals(2,costlist.size());
-    assertEquals(costlist.get(0),"date:2022-10-01,amount: 200.00, usage:buy clothes");
-    assertEquals(costlist.get(1),"date:2022-01-01,amount: 100.00, usage:go to restaurants");
+    assertEquals(costlist.get(0),"date:2022-10-01,amount: 200.00, usage:buy clothes\n");
+    assertEquals(costlist.get(1),"date:2022-01-01,amount: 100.00, usage:go to restaurants\n");
 }
 
 @Test
@@ -95,6 +109,18 @@ public void testmultipleshowCost(){
     public void testclearcostinvalid(){
         testab.addcost(Cost1);
         assertFalse(testab.clearCost("20220101"));
+    }
+
+    @Test
+    public void testclearcostlogEvent(){
+        testab.addcost(Cost1);
+        testab.clearCost("2022-10-01");
+        ArrayList<Event> events = new ArrayList<>();
+        for(Event e:el) {
+            events.add(e);
+        }
+        assertEquals(3,events.size());
+        assertEquals(events.get(2).getDescription(),"Costs before " + "2022-10-01" + " are cleared");
     }
 
 @Test
@@ -150,6 +176,8 @@ public void testclearcostjustthatday(){
         assertEquals(1,costs.size());
         checkCost("2022-10-01",200.00,"buy clothes",Cost1);
     }
+
+
 
 
 
