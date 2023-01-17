@@ -26,6 +26,7 @@ private  Cost Cost3 = new Cost("2022-09-15",500.50,"go for a trip");
     el.clear();
 }
 
+
 @Test
     public void testaddonecost(){
     assertEquals(testab.size(),0);
