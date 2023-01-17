@@ -18,6 +18,7 @@ private  Cost Cost1 = new Cost("2022-10-01",200.00,"buy clothes");
 private  Cost Cost2 = new Cost("2022-01-01",100.00,"go to restaurants");
 private  Cost Cost3 = new Cost("2022-09-15",500.50,"go for a trip");
 
+
 @BeforeEach
     public void setup(){
     testab = new AccountBook("Selina's AccountBook");
