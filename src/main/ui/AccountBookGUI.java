@@ -132,12 +132,14 @@ public class AccountBookGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
+        // Add
         if (o == button1) {
             String date = datetext.getText();
             Double amount = Double.parseDouble(amounttext.getText());
             String usage = usagetext.getText();
             Cost newcost = new Cost(date, amount, usage);
             accountBook.addcost(newcost);
+            //Clear cost on given date
         } else if (o == button2) {
             String givendate = datetext.getText();
             accountBook.clearCost(givendate);
